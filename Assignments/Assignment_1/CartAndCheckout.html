@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zepto-Online Shopping</title>
+    <Link rel="stylesheet" href="CartAndCheckout.css">
+    <Link rel="icon" href="images/logo.JPG" type="image/x-icon" >
+    <Link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo">
+            <img src="images/logo.JPG" alt="Company Logo">
+        </div>
+        <div class="search-bar">
+            <input type="text" placeholder="Explore world of groceries..">
+            <button type="submit">Search</button>
+        </div>
+        <nav class="main-menu">
+            <ul>
+                <li><a href="Home.html">HOME</a></li>
+                <li><a href="CartAndCheckout.html">
+                    <i class="fas fa-shopping-cart"></i>
+                    CART & CHECKOUT
+                    <span class="cart-count">3</span>
+                </a>
+                </li>
+            </ul>
+        </nav>
+
+        <div>
+            <p>Welcome <span><strong>Bhagya!</strong></span></p>
+        </div>
+    </header>
+    <body>
+        <div class="cart-container">
+            <h2><i class="fas fa-shopping-cart cart-icon"></i>Your Shopping Cart</h2>
+    
+            <table>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Price</th>
+                        <th>Quantity</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Broccoli</td>
+                        <td>$6.67 /lb</td>
+                        <td>2 lb</td>
+                        <td>$13.34</td>
+                    </tr>
+                    <tr>
+                        <td>Avocado</td>
+                        <td>$2.25 /lb</td>
+                        <td>3 lb</td>
+                        <td>$6.75</td>
+                    </tr>
+                    <tr>
+                        <td>Dal Makhani</td>
+                        <td>$3.00</td>
+                        <td>2</td>
+                        <td>$6.00</td>
+                    </tr>
+                </tbody>
+            </table>
+    
+            <div class="total">
+                Total: $26.09
+            </div>
+    
+            <a href="#payment-form" class="checkout-btn">Proceed to Checkout / Payment</a>
+        </div>
+
+
+        <section class="payment-form" id="payment-form">
+            <h2>Payment Information</h2>
+            
+            <div class="card-icons">
+                <i class="fab fa-cc-visa"></i>
+                <i class="fab fa-cc-mastercard"></i>
+            </div>
+            <div class="total-payment">
+                <h3>Total Payment: <strong>$26.09</strong></h3>
+            </div>
+    
+
+            <form>
+                <label for="card-number">Card Number</label>
+                <input type="text" id="card-number" name="card-number" placeholder="**** **** **** ****" maxlength="19" required>
+    
+                <label for="card-holder">Card Holder</label>
+                <input type="text" id="card-holder" name="card-holder" placeholder="John Doe" required>
+    
+                <div class="card-details">
+                    <div>
+                        <label for="expiry-date">Expiry Date</label>
+                        <input type="text" id="expiry-date" name="expiry-date" placeholder="MM/YY" maxlength="5" required>
+                    </div>
+                    <div>
+                        <label for="cvv">CVV</label>
+                        <input type="text" id="cvv" name="cvv" placeholder="123" maxlength="3" required>
+                    </div>
+                </div>
+    
+                <button type="submit">Submit Payment</button>
+                <audio controls>
+                    <source src="audio/cash-register-audio.mp3" type="audio/mp3">
+                    Your browser does not support the audio element.
+                </audio>
+                
+            </form>
+        </section>
+    </body>
+
+    <footer>
+        <details>
+            <summary>Contact Information</summary>
+            <p>Email: <a href="mailto:trivedi.bh@northeastern.edu">trivedi.bh@northeastern.edu</a></p>
+            <p>Phone: <a href="tel:+18578004279">+18578004279</a></p>
+        </details>
+        <p class="copyright">&copy; 2024 Zepto-Online Shopping. All rights reserved.</p>
+    </footer>
+</body>
+</html>
