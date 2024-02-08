@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html>
+ 
+<head>
+    <title></title>
+    <style>
+        label {
+            float: left;
+            width: 150px;
+        }
+ 
+        #container {
+            width: 700px;
+            margin: auto;
+            background-color: beige;
+        }
+ 
+        main {
+            padding: 50px;
+        }
+        table {
+        width: 100%;
+        margin-top: 20px;
+        border-collapse: collapse; 
+    }
+    th, td {
+        text-align: left;
+        padding: 8px; 
+    }
+    th {
+        background-color: #000000;
+        color: #ffffff; 
+    }
+    tr:nth-child(even) {
+        background-color: #000000; 
+    }
+    tr:hover {
+        background-color: #796969; 
+    }
+    input[type="button"], input[type="reset"] {
+        background-color: #2b59a9;
+        border: none;
+        color: white;
+        padding: 10px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        border-radius: 5px; 
+    }
+    input[type="button"]:hover, input[type="reset"]:hover {
+        background-color: #2b59a9; 
+    }
+ 
+    table {
+        border-spacing: 0;
+        border: 2px solid #2b59a9;
+    }
+ 
+    th, td {
+        border: 1px solid #ddd; 
+        text-align: left;
+        padding: 8px;
+    }
+ 
+    th {
+        background-color: #2b59a9;
+        color: white;
+    }
+    h2 {
+        text-align: center;
+    }
+    </style>
+</head>
+ 
+<body id="container">
+    <main>
+        <h2>Feedback Form</h2>
+        <h3>Please provide your feedback</h3>
+        <br><br>
+ 
+        <form id="myForm">
+            <label>Title*:</label>
+            <input type="radio" name="title" id="miss" value="miss" required="required" /> Miss
+            <input type="radio" name="title" id="mr" value="mr" required="required" /> Mr.
+            <input type="radio" name="title" id="mrs" value="mrs" required="required" /> Mrs.
+            <br><br>
+ 
+            <label for="firstName">First Name*:</label>
+            <input type="text" name="firstName" id="firstName" placeholder="First Name" required minlength="2" maxlength="30" pattern="[A-Za-z0-9]+" title="Only alphanumeric characters are allowed.">
+            <br><br>
+ 
+            <div id="error_firstName" style="display: none; color: red;">
+                Invalid name, please enter a valid name
+                <br><br>
+            </div>
+            <label for="emailId">Email Id*:</label>
+            <input type="text" name="emailId" id="emailId" placeholder="name@northeastern.edu" required minlength="8" maxlength="30">
+            <br><br>
+            <div id="error_emailId" style="display: none; color: red;">
+                Invalid email Id, please enter a valid emailId
+                <br><br>
+            </div>
+            <label for="phoneNumber">Phone Number*:</label>
+            <input type="text" name="phoneNumber" id="phoneNumber" placeholder="xxx-xxx-xxxx" required >
+            <br><br>
+ 
+            <div id="error_phoneNumber" style="display: none; color: red;">
+                Invalid phone number, please enter a valid phone No
+                <br><br>
+            </div>
+ 
+        </div>
+        <label for="zipCode">zipCode*</label>
+        <input type="text" name="zipCode" id="zipCode" placeholder="zipCode" required minlength="5" maxlength="6">
+        <br><br>
+ 
+            <div id="error_zipCode" style="display: none; color: red;">
+                Invalid zipcode. Please enter a valid zipcode.
+                <br><br>
+           </div>
+ 
+ 
+            <label for="comments">Comments:</label>
+            <textarea name="text" id="comments" placeholder="Your Comments" cols="30" rows="10" required></textarea>
+            <br><br>
+ 
+           
+ 
+        </div>
+        <label for="Address">Address</label>
+        <input type="text" name="Address" id="Address" placeholder="Address">
+        
+        <br><br>
+ 
+        <div id="error_Address" style="display: none; color: red;">
+            Invalid Address. Please enter a address.
+            <br><br>  
+       </div>
+
+       <label for="Address2">Address 2</label>
+        <input type="text" name="Address2" id="Address2" placeholder="Address 2">
+ 
+        <br><br>
+ 
+        <label for="optionsSelect">Feedback: </label>
+            <select id="optionsSelect" name="options" onchange="handleSelectChange()">
+                <option value="">Please choose</option>
+                <option value="Option1">Faculty</option>
+                <option value="Option2">Department</option>
+                <option value="Option3">OnCampus</option>
+                <option value="Option4">Course</option>
+                <option value="Option5">Terms</option>
+            </select>
+         
+            <div id="checkboxArea"></div> 
+             
+            <br>
+            <input type="Submit" value="Submit My Form">
+            <input type="Reset" onclick="clearcheckBoxArea()">
+            <br><br>
+        </form>
+    </main>
+ 
+<script>
+    var form = document.getElementById("myForm");
+    form.addEventListener("submit",submitted);
+ 
+    var validName = false;
+    var validEmail = false;
+    var validPhone = false;
+    var validZip = false;
+    var validAddress = false;
+    var validAddress2 = false;
+ 
+    //regular expressions
+     var regExName = /^[a-zA-Z]+$/;
+     var regExEmail = /([\w\.]+)@northeastern\.edu$/;
+     var regExPhone =  /^(\(\d{3}\)|\d{3})[ -]?\d{3}[ -]?\d{4}$/;
+     var regExZip= /^\d{5}$/;
+     var regExAddress = /^[a-zA-Z0-9\s]+$/;
+ 
+        var firstName = document.getElementById("firstName");
+        firstName.addEventListener("input", validate);
+ 
+        var emailId = document.getElementById("emailId");
+        emailId.addEventListener("input", validate);
+ 
+        var phoneNo = document.getElementById("phoneNumber");
+        phoneNo.addEventListener("input", validate);
+ 
+        var zipCode=document.getElementById("zipCode");
+        zipCode.addEventListener("input", validate);
+ 
+        var Address = document.getElementById("Address");
+        Address.addEventListener("input", validate);
+
+        var Address2 = document.getElementById("Address2");
+        Address2.addEventListener("input", validate);
+ 
+        //function validate
+        function validate(e){
+            var value = e.target.value;
+            var type = this.id;
+            var em = "error_" + type;
+ 
+            switch(type){
+                case "firstName" :
+                    if(!value.trim().match(regExName)){
+                        document.getElementById(em).style.display = "block";
+                        this.style.border = "2px solid red";
+                        validName = false;
+                    }
+                    else{
+                        document.getElementById(em).style.display = "none";
+                        this.style.border = "";
+                        validName = true;
+                    }
+                    break;
+ 
+                case "emailId":
+                    if (!value.trim().match(regExEmail)) {
+                        document.getElementById(em).style.display = "block";
+                        this.style.border = "2px solid red";
+                        validEmail = false;
+                    }
+                    else {
+                        document.getElementById(em).style.display = "none";
+                        this.style.border = "";
+                        validEmail = true;
+                    }
+                    break;
+ 
+                case "phoneNumber":
+                    if (!value.trim().match(regExPhone)) {
+                        document.getElementById(em).style.display = "block";
+                        this.style.border = "2px solid red";
+                        validPhone = false;
+                    }
+                    else {
+                        document.getElementById(em).style.display = "none";
+                        this.style.border = "";
+                        validPhone = true;
+                    }
+                    break;
+ 
+                case "zipCode":
+                    if(!value.trim().match(regExZip)){
+                        document.getElementById(em).style.display = "block";
+                        this.style.border = "2px solid red";
+                        validZip=false;
+                    }
+                    else{
+                        document.getElementById(em).style.display = "none";
+                        this.style.border = "";
+                        validZip = true;
+                    }
+                case "Address2":
+                    if(value.length==0 || value.length>0){
+                        document.getElementById(em).style.display = "none";
+                        this.style.border="";
+                        validAddress2 = true;
+                    }    
+                    case "Address":
+                    if(!value.trim().match(regExAddress)){
+                        document.getElementById(em).style.display = "block";
+                        this.style.border = "2px solid red";
+                        validAddress=false;
+                    }
+                    else if(value === ''){
+                        document.getElementById(em).style.display = "none";
+                        this.style.border = "";
+                        validAddress = true;
+                    }
+                    else{
+                        document.getElementById(em).style.display = "none";
+                        this.style.border = "";
+                        validAddress = true;
+                    }
+                    break;
+            }
+        }
+ 
+      function submitted(e){
+        if(validName){
+            alert("Data Entered Successfully");
+        }
+        else{
+            alert("Please enter valid one");
+        }
+      }
+ 
+      document.addEventListener("DOMContentLoaded", function() {
+        var form = document.getElementById("myForm");
+        var submitButton = document.querySelector("input[type='submit']");
+ 
+        submitButton.disabled = true;
+ 
+        function checkFields() {
+            var firstName = document.getElementById("firstName").value.trim();
+            var emailId = document.getElementById("emailId").value.trim();
+            var phoneNumber = document.getElementById("phoneNumber").value.trim();
+            var comments = document.getElementById("comments").value.trim();
+            var Address = document.getElementById("Address").value.trim();
+            var Address2 = document.getElementById("Address2").value.trim();
+            var titleChecked = document.querySelector("input[name='title']:checked");
+ 
+            if (firstName && emailId && phoneNumber && comments && titleChecked) {
+                submitButton.disabled = false;
+            } else {
+                submitButton.disabled = true;
+            }
+        }
+ 
+        var inputs = form.querySelectorAll("input, textarea");
+        inputs.forEach(function(input) {
+            input.addEventListener("input", checkFields);
+        });
+ 
+        form.addEventListener("change", checkFields);
+ 
+        form.addEventListener("submit", function(e) {
+            e.preventDefault();
+            alert("Form is ready to be submitted.");
+        });
+    });
+    document.addEventListener("DOMContentLoaded", function() {
+    var form = document.getElementById("myForm");
+    var submitButton = document.querySelector("input[type='submit']");
+ 
+    var table = document.createElement("table");
+    var thead = document.createElement("thead");
+    var tbody = document.createElement("tbody");
+    table.appendChild(thead);
+    table.appendChild(tbody);
+ 
+    var headerRow = thead.insertRow();
+    ["Title", "First Name", "Email Id", "Phone Number", "Comments" , "zipcode" , "Address", "Address 2"].forEach(function(text) {
+        var th = document.createElement("th");
+        th.textContent = text;
+        headerRow.appendChild(th);
+    });
+ 
+    form.addEventListener("submit", function(e) {
+        e.preventDefault(); 
+ 
+ 
+        var title = document.querySelector("input[name='title']:checked")?.value;
+        var firstName = document.getElementById("firstName").value;
+        var emailId = document.getElementById("emailId").value;
+        var phoneNumber = document.getElementById("phoneNumber").value;
+        var comments = document.getElementById("comments").value;
+        var zipCode = document.getElementById("zipCode").value;
+        var Address = document.getElementById("Address").value;
+        var Address2 = document.getElementById("Address2").value;
+ 
+        var existingEmails = tbody.querySelectorAll("tr td:nth-child(3)"); 
+        for (var i = 0; i < existingEmails.length; i++) {
+            if (existingEmails[i].textContent === emailId) {
+                alert("Email already exists.");
+ 
+                return form.reset(); 
+            }
+        }
+ 
+        
+        var row = tbody.insertRow();
+        [title, firstName, emailId, phoneNumber, comments , zipCode , Address, Address2].forEach(function(text) {
+            var cell = row.insertCell();
+            cell.textContent = text;
+        });
+ 
+       
+        form.reset();
+        clearcheckBoxArea();
+        checkFields();
+       
+    });
+ 
+});
+ 
+function handleSelectChange() {
+    var selectBox = document.getElementById('optionsSelect');
+    var selectedValue = selectBox.value;
+    var checkboxArea = document.getElementById('checkboxArea');
+   
+    checkboxArea.innerHTML = '';
+   
+   
+    if (selectedValue === 'Option1') { 
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'rateID';
+        checkbox.name = 'rateID';
+        checkbox.value = 'rate';
+       
+        var label = document.createElement('label');
+        label.htmlFor = 'rate';
+        label.appendChild(document.createTextNode('Professor rating in 5'));
+ 
+        checkboxArea.appendChild(checkbox);
+        checkboxArea.appendChild(label);
+       
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                var textField = document.createElement('input');
+                textField.type = 'text';
+                textField.id = 'rating';
+                textField.name = 'rating';
+                textField.placeholder = 'Specify the rating...';
+                textField.required = true;
+                checkboxArea.appendChild(textField);
+            } else {
+                var textField = document.getElementById('rating');
+                if (textField) {
+                    checkboxArea.removeChild(textField);
+                }
+            }
+        });
+    }
+    else if(selectedValue ==='Option2'){
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'DepartmentID';
+        checkbox.name = 'DepartmentID';
+        checkbox.value = 'Department';
+       
+        var label = document.createElement('label');
+        label.htmlFor = 'department';
+        label.appendChild(document.createTextNode('Department rating in 5'));
+ 
+        checkboxArea.appendChild(checkbox);
+        checkboxArea.appendChild(label);
+       
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                var textField = document.createElement('input');
+                textField.type = 'text';
+                textField.id = 'Department';
+                textField.name = 'Department';
+                textField.placeholder = 'Specify the rating of dept...';
+                textField.required = true;
+                checkboxArea.appendChild(textField);
+            } else {
+                var textField = document.getElementById('Department');
+                if (textField) {
+                    checkboxArea.removeChild(textField);
+                }
+            }
+        });
+       
+ 
+    }
+    else if(selectedValue ==='Option3'){
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'OnCampus';
+        checkbox.name = 'OnCampus';
+        checkbox.value = 'OnCampus';
+       
+        var label = document.createElement('label');
+        label.htmlFor = 'OnCampus';
+        label.appendChild(document.createTextNode('OnCampus job availability'));
+ 
+        checkboxArea.appendChild(checkbox);
+        checkboxArea.appendChild(label);
+       
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                var textField = document.createElement('input');
+                textField.type = 'text';
+                textField.id = 'OnCampus';
+                textField.name = 'OnCampus';
+                textField.placeholder = 'Have SSN?';
+                textField.required = true;
+                checkboxArea.appendChild(textField);
+            } else {
+                var textField = document.getElementById('OnCampus');
+                if (textField) {
+                    checkboxArea.removeChild(textField);
+                }
+            }
+        });
+ 
+    }
+    else if(selectedValue ==='Option4'){
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'Course';
+        checkbox.name = 'Course';
+        checkbox.value = 'Course';
+       
+        var label = document.createElement('label');
+        label.htmlFor = 'Course';
+        label.appendChild(document.createTextNode('Course name'));
+ 
+        checkboxArea.appendChild(checkbox);
+        checkboxArea.appendChild(label);
+       
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                var textField = document.createElement('input');
+                textField.type = 'text';
+                textField.id = 'Course';
+                textField.name = 'Course';
+                textField.placeholder = 'Which Course?';
+                textField.required = true;
+                checkboxArea.appendChild(textField);
+            } else {
+                var textField = document.getElementById('Course');
+                if (textField) {
+                    checkboxArea.removeChild(textField);
+                }
+            }
+        });
+ 
+    }
+    else{
+        var checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.id = 'Terms';
+        checkbox.name = 'Terms';
+        checkbox.value = 'Terms';
+       
+        var label = document.createElement('label');
+        label.htmlFor = 'Terms';
+        label.appendChild(document.createTextNode('Fall23/Spring24'));
+ 
+        checkboxArea.appendChild(checkbox);
+        checkboxArea.appendChild(label);
+       
+        checkbox.addEventListener('change', function() {
+            if (this.checked) {
+                var textField = document.createElement('input');
+                textField.type = 'text';
+                textField.id = 'Terms';
+                textField.name = 'Terms';
+                textField.placeholder = 'Mention your term';
+                textField.required = true;
+                checkboxArea.appendChild(textField);
+            } else {
+                var textField = document.getElementById('Terms');
+                if (textField) {
+                    checkboxArea.removeChild(textField);
+                }
+            }
+        });
+ 
+    }
+}
+function clearcheckBoxArea() {
+var div = document.getElementById("checkboxArea");            
+while(div.firstChild) {
+    div.removeChild(div.firstChild);
+    }
+}
+</script>
+ 
+<h2 class="centered-heading">Our customer's Valuable feedbacks</h2>
+ 
+</body>
+ 
+</html>
