@@ -1,0 +1,45 @@
+.search-form {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 1rem;
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 2rem; 
+    border-radius: 8px;
+    background: linear-gradient(to right, var(--gradient-start), var(--gradient-end));
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+
+    .form-group {
+        display: contents;
+
+        label {
+            grid-column: 1 / -1;
+            color: white; 
+        }
+
+        input[type="text"], input[type="date"] {
+            width: 100%;
+            padding: 0.5rem;
+            border: 1px solid var(--secondary-color);
+            background-color: rgba(255, 255, 255, 0.8); 
+            color: #333; 
+        }
+    }
+
+    .form-actions {
+        grid-column: 1 / -1;
+        display: grid;
+        justify-content: center;
+    }
+
+    @include respond-to('small') {
+        grid-template-columns: 1fr;
+        max-width: 90%;
+    }
+
+    @include respond-to('medium') {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 2rem;
+        max-width: 80%;
+    }
+}

@@ -1,0 +1,10 @@
+@for $i from 1 through 10 {
+    .m-#{$i} { margin: $i * 5px; }
+    .p-#{$i} { padding: $i * 5px; }
+}
+  
+@each $color-name, $color-value in $colors {
+    .text-#{$color-name} {
+      color: $color-value;
+    }
+}

@@ -1,0 +1,41 @@
+$primary-color: #007bff;
+$secondary-color: #6c757d;
+$light-color: #f8f9fa;
+$dark-color: #343a40;
+$gradient-start: #6a11cb; 
+$gradient-end: #2575fc; 
+
+
+$base-font-size: 16px;
+$font-stack: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+$grid-columns: 12;
+$gutter-width: 30px;
+
+$themes: (
+  light: (
+    background: $light-color,
+    text: $dark-color
+  ),
+  dark: (
+    background: $dark-color,
+    text: $light-color
+  )
+);
+
+//loop map
+$colors: (
+  "primary": $primary-color,
+  "secondary": $secondary-color,
+  "light": $light-color,
+  "dark": $dark-color
+);
+
+:root {
+  --primary-color: #{$primary-color};
+  --secondary-color: #{$secondary-color};
+  --light-color: #{$light-color};
+  --dark-color: #{$dark-color};
+  --gradient-start: #6a11cb; 
+    --gradient-end: #2575fc; 
+}
