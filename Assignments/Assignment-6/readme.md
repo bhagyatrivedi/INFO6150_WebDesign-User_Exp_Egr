@@ -2,34 +2,59 @@
 
 This project is a demonstration of advanced CSS and SASS/SCSS features, focusing on responsive design with CSS Grid and Flexbox, alongside a rich implementation of SASS/SCSS. The website consists of a Search Page and a Booking Page, each designed to showcase specific layout and styling techniques.
 
-## Features
+## SCSS Features and Implementation
 
-- **CSS Grid Layouts**: Utilized in the `.results-container` to display hotel cards and in the `.offers-grid` for special offers.
-- **Flexbox Layouts**: Implemented in the `.city-banner` for horizontal scrolling on the Search Page and in `.form-actions` for centering buttons within forms.
-- **SASS/SCSS**:
-  - **Variables**: Defined for colors, font stacks, and layout properties.
-  - **Custom Properties**: CSS variables are set using SCSS variables for theming.
-  - **Nesting**: SCSS nesting is used throughout for cleaner and more organized stylesheets.
-  - **Interpolation**: Used within the `@mixin respond-to` for responsive design.
-  - **Placeholder Selectors**: A `%button-base` placeholder is used for button styles.
-  - **Mixins**: Several mixins are created for reusable styles, such as `@mixin flex-center` and `@mixin theme`.
-  - **Functions**: A `dynamic-spacing` function is utilized to calculate margins and paddings.
+### Variables and Custom Properties
 
-## Additional SASS Features
+- **Usage**: Define and centralize reusable values like color schemes, font stacks, and layout margins, ensuring consistency and ease of updates.
+- **Implementation**: Applied throughout the `abstracts/_variables.scss` file to set global styles that are accessed across the entire project.
 
-- **Media Query Mixins**: Simplifies the use of media queries for responsiveness.
-- **Loops**: Used to generate utility classes for margins, padding, and text colors.
-- **Conditionals**: Implemented within mixins to apply styles based on themes (dark and light themes).
+### Mixins
 
-## Project Structure
+- **Usage**: Create reusable and parameterized blocks of code for themes, media queries, and common patterns like flexbox and grid settings.
+- **Implementation**: Found in `abstracts/_mixins.scss`, mixins are used for responsive breakpoints, flex and grid layouts, enhancing the DRY principle in the styling process.
 
-The project's SASS/SCSS files are organized into multiple folders based on UI features, common elements, or themes:
+### Functions
 
-- `abstracts/`: Contains `_variables.scss`, `_mixins.scss`, and `_functions.scss` for global definitions.
-- `base/`: Includes base styles such as `_reset.scss`, `_typography.scss`, and `_utilities.scss`.
-- `components/`: Houses SCSS files for specific components like `_button.scss` and `_form.scss`.
-- `layout/`: Contains SCSS for layout-related styling, including `_header.scss`, `_footer.scss`, and `_grid.scss`.
-- `pages/`: SCSS files specific to the Search Page and Booking Page are located here.
+- **Usage**: Perform operations and calculations, primarily for responsive typography and spacing.
+- **Implementation**: Utilized in `abstracts/_functions.scss` for converting pixel values to rem units, facilitating accessible design.
+
+### Placeholder Selectors
+
+- **Usage**: Define a common set of styles that can be extended across multiple selectors, reducing redundancy.
+- **Implementation**: Used in `_placeholders.scss` for common patterns such as button styles and form elements, which are then extended in `components/` and `layout/`.
+
+### Nesting
+
+- **Usage**: Nest selectors within one another to mirror the HTML structure, improving readability and organization.
+- **Implementation**: Extensively used across the project, particularly in component and layout SCSS files, to scope styles and manage specificity efficiently.
+
+## Additional SCSS Features
+
+### Conditional Logic (@if, @else)
+
+- **Usage**: Apply different styles based on conditions, such as theme preferences or feature supports.
+- **Implementation**: Incorporated in mixins for theme switching and feature checks, allowing dynamic styling based on user or device attributes.
+
+### Loops (@for, @each, @while)
+
+- **Usage**: Generate repetitive CSS blocks or create variations of a component or utility classes, such as a series of margin or padding utilities.
+- **Implementation**: Loops are used in `abstracts/_mixins.scss` and `base/_utilities.scss` for creating responsive utility classes and iterating over colors or sizes defined in variables.
+
+### @import
+
+- **Usage**: Split SCSS into smaller, more manageable files, then import them into a main file to compile a single CSS output.
+- **Implementation**: The `main.scss` file serves as the entry point, importing all other SCSS files from `abstracts`, `base`, `components`, `layout`, and `pages`, streamlining project organization and compilation.
+
+### @extend
+
+- **Usage**: Share sets of CSS properties from one selector to another without duplicating code, promoting the DRY principle.
+- **Implementation**: Applied in `components/_button.scss` and `layout/_flexbox.scss` to extend common styles for buttons and flex containers, ensuring consistency and reducing the amount of generated CSS.
+
+### Responsiveness with SCSS
+
+- **Usage**: Achieve fluid and adaptable designs across different screen sizes and devices using mixins, conditionals, and loops.
+- **Implementation**: Responsive design is woven into the fabric of the project through media query mixins that adapt layouts, typography, and components based on viewport width, orientation, and other factors.
 
 ## UI Design
 
