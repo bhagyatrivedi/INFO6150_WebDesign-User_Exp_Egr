@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+</head>
+
+<body>
+    <div>
+        <h1>
+            Calculator
+        </h1>
+    </div>
+    <div>
+        <div id="username-display">
+        </div>
+        <form>
+            <label for="num1">Number 1</label>
+            <input type="number" name="num1" id="num1" placeholder="Number 1" required>
+            <span class="error" id="errorNumber1"></span>
+            <br>
+            <div>
+                <label for="num2">Number 2</label>
+                <input type="number" name="num2" id="num2" placeholder="Number 2" required>
+                <span class="error" id="errorNumber2"></span>
+
+            </div>
+            <br>
+            <div>
+                <button class="operation-btn" id="addBtn">Add</button>
+                <button class="operation-btn" id="subtractBtn">Subtract</button>
+                <button class="operation-btn" id="multiplyBtn">Multiply</button>
+                <button class="operation-btn" id="divideBtn">Divide</button>
+            </div>
+        </form>
+    </div>
+    <div>
+        <h2><span id="result"></span></h2>
+    </div>
+    <script>
+        $(document).ready(function () {
+            const urlParams = new URLSearchParams(window.location.search);
+            const username = urlParams.get("username");
+
+            if (username) {
+                $("#username-display").text(`Logged-in User: ${username}`);
+            }
+
+            const number1 = $("#num1");
+            const number2 = $("#num2");
+            const result = $("#result");
+            const errorNum1 = $("#errorNumber1");
+            const errorNum2 = $("#errorNumber2");
+            const operation = $(".operation-btn");
+
+
+
+            operation.on("click", function (event) {
+                event.preventDefault(); // Prevent form from submission and page reloading
+
+                const num1 = parseFloat(number1.val());
+                const num2 = parseFloat(number2.val());
+                const operation = $(this).text();
+
+                // valid numbers
+                if (!isValidNumber(num1) || !isValidNumber(num2)) {
+                    handleInvalidInput("Please enter a valid number.");
+                    return;
+                }
+
+                // special characters
+                if (hasSpecialCharacters(number1.val()) || hasSpecialCharacters(number2.val())) {
+                    handleInvalidInput("Special characters are not allowed.");
+                    return;
+                }
+
+                // infinite values
+                if (!isFiniteNumber(num1) || !isFiniteNumber(num2)) {
+                    handleInvalidInput("Please enter a finite number.");
+                    return;
+                }
+
+                // Perform the operation and display the result
+                const result = performOperation(operation, num1, num2);
+                result.text(`Result: ${result}`);
+            });
+
+            function isValidNumber(number) {
+                return !isNaN(number);
+            }
+
+            function hasSpecialCharacters(value) {
+                const specialCharacterRegex = /[!@#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?]+/;
+                return specialCharacterRegex.test(value);
+            }
+
+            function isFiniteNumber(number) {
+                return isFinite(number);
+            }
+
+            function handleInvalidInput(errorMessage) {
+                errorNum1.text(errorMessage);
+                errorNum2.text(errorMessage);
+                result.text("Result will be displayed here.");
+            }
+
+            const performOperation = (operation, num1, num2) => {
+                switch (operation) {
+                    case "Add":
+                        return num1 + num2;
+                    case "Subtract":
+                        return num1 - num2;
+                    case "Multiply":
+                        return num1 * num2;
+                    case "Divide":
+                        if (num2 === 0) {
+                            return "Division by zero is not allowed.";
+                        }
+                        return num1 / num2;
+                    default:
+                        return "Invalid operation";
+                }
+            };
+        });
+    </script>
+</body>
+
+</html>

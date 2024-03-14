@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="script.js"></script>
+    <title>Login Page</title>
+</head>
+
+<body>
+    <div>
+        <div>
+            <h1>Login Page</h1>
+        </div>
+        <div>
+            <form action="calculator.html" method="get">
+                <label for="email">Email</label>
+                <input type="email" name="email" id="email" placeholder="Email" required>
+                <div id="errorEmail" class="error-class"></div>
+                <br>
+                <label for="username">Username</label>
+                <input type="text" name="username" id="username" placeholder="Username" required>
+                <div id="errorUsername" class="error-class"></div>
+                <br>
+                <label for="password">Password</label>
+                <input type="password" name="password" id="password" placeholder="Password" required>
+                <div id="errorPassword" class="error-class"></div>
+                <br>
+                <label for="confirm_password">Confirm Password</label>
+                <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm Password" required>
+                <div id="errorConfirmPassword" class="error-class"></div>
+                <br>
+                <input type="submit" value="Login" id="loginButton" disabled>
+            </form>
+        </div>
+    </div>
+</body>
+
+</html>
