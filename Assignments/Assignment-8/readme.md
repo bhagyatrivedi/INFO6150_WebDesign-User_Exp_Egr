@@ -24,31 +24,43 @@ or
 bash
 Copy code
 node server.js
-API Endpoints
-Create User
-POST /user/create
-Creates a new user with full name, email, and password.
-Update User Details
-PUT /user/edit
-Allows updating the user's full name and password. Email is not updatable.
-Delete User
-DELETE /user/delete
-Deletes a user by their email.
-Retrieve All Users
-GET /user/getAll
-Retrieves all users' information from the database.
-Upload Image
-POST /user/uploadImage
-Allows users to upload an image file. Accepts JPEG, PNG, and GIF formats.
-Testing the API
+
+### API Endpoints
+
+- Create User
+ POST /user/create
+ Creates a new user with full name, email, and password.
+
+- Update User Details
+ PUT /user/edit
+ Allows updating the user's full name and password. Email is not updatable.
+
+- Delete User
+ DELETE /user/delete
+ Deletes a user by their email.
+
+- Retrieve All Users
+ GET /user/getAll
+ Retrieves all users' information from the database.
+
+- Upload Image
+ POST /user/uploadImage
+ Allows users to upload an image file. Accepts JPEG, PNG, and GIF formats.
+
+### Testing the API
 Utilize Postman to test the API endpoints. Ensure to set the request type accordingly and provide the required information in the request body or as form-data for file uploads.
 
-Configuration
+### Configuration
 Configure your MongoDB URI in the config/default.json file.
+
 Ensure the images directory exists within the project directory for image uploads.
-Additional Information
+
+
+### Additional Information
 Passwords are securely hashed using bcrypt.
+
 Uploaded images are stored in the images directory, and their paths are saved in the database.
-License
+
+### License
 This project is licensed under the MIT License - see the LICENSE.md file for details.
 
