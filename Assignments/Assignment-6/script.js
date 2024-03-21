@@ -20,7 +20,7 @@ const hotelData = {
       { name: "Magnolia Hotel Houston", description: "Historic building turned boutique hotel.", price: "$210", imageUrl: "images/magnolia-houston.jpeg" }
     ],
     "Phoenix": [
-      { name: "Arizona Biltmore", description: "A landmark hotel with stunning architecture.", price: "$340", imageUrl: "images/biltmore-azjpeg" },
+      { name: "Arizona Biltmore", description: "A landmark hotel with stunning architecture.", price: "$340", imageUrl: "images/biltmore-az.jpeg" },
       { name: "Royal Palms Resort and Spa", description: "Mediterranean style villa with scenic views.", price: "$390", imageUrl: "images/royal-palms-az.jpeg" },
       { name: "The Camby", description: "A vibrant and playful atmosphere.", price: "$200", imageUrl: "images/camby-az.jpeg" }
     ],
@@ -32,7 +32,7 @@ const hotelData = {
     "San Antonio": [
       { name: "Hotel Emma", description: "A culinary-centric, boutique experience.", price: "$300", imageUrl: "images/emma-SA.jpeg" },
       { name: "The St. Anthony, a Luxury Collection Hotel", description: "Refined and sophisticated lodging.", price: "$330", imageUrl: "images/anthony-SA.jpeg" },
-      { name: "Mokara Hotel & Spa", description: "A relaxing retreat with rooftop pool.", price: "$280", imageUrl: "images/mokara-SA.jpeg" }
+      { name: "Mokara Hotel & Spa", description: "A relaxing retreat with rooftop pool.", price: "$280", imageUrl: "images/mokara-SA.jpg" }
     ]
   };
   
