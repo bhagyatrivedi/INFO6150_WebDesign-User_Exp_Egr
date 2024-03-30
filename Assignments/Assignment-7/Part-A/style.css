@@ -1,18 +1,18 @@
 body {
-    font-family: "Calibri", Candara, Segoe;
-    background-color: rgb(0, 0, 0);
+    font-family: 'Times New Roman', Times, serif;
+    background-color: bisque;
     margin: 0;
     padding: 0;
     text-align: center;
 }
 
 h1 {
-    color: #ffffff;
+    color: #000000;
     font-size: 50px;
 }
 
 form {
-    background-color:  rgb(21, 187, 212);
+    background-color: #2baab4;
     border: 2px solid #ddd;
     padding: 25px;
     max-width: 300px;
@@ -41,7 +41,7 @@ input[type="submit"] {
     padding: 10px;
     font-size: 20px;
     border: 2px solid #000000;
-    background-color: #4fa073;
+    background-color: #4fa053;
     color: #ffffff;
     cursor: pointer;
     transition: all 0.5s;

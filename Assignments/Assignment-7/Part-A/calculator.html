@@ -39,7 +39,7 @@
         </form>
     </div>
     <div>
-        <h2><span id="result"></span></h2>
+        <h2>Result: <span id="result"></span></h2>
     </div>
     <script>
         $(document).ready(function () {
@@ -50,20 +50,20 @@
                 $("#username-display").text(`Logged-in User: ${username}`);
             }
 
-            const number1 = $("#num1");
-            const number2 = $("#num2");
-            const result = $("#result");
+            const num1IP = $("#num1");
+            const num2IP = $("#num2");
+            const resultant = $("#result");
             const errorNum1 = $("#errorNumber1");
             const errorNum2 = $("#errorNumber2");
-            const operation = $(".operation-btn");
+            const operationButtons = $(".operation-btn");
 
 
 
-            operation.on("click", function (event) {
+            operationButtons.on("click", function (event) {
                 event.preventDefault(); // Prevent form from submission and page reloading
 
-                const num1 = parseFloat(number1.val());
-                const num2 = parseFloat(number2.val());
+                const num1 = parseFloat(num1IP.val());
+                const num2 = parseFloat(num2IP.val());
                 const operation = $(this).text();
 
                 // valid numbers
@@ -73,7 +73,7 @@
                 }
 
                 // special characters
-                if (hasSpecialCharacters(number1.val()) || hasSpecialCharacters(number2.val())) {
+                if (hasSpecialCharacters(num1IP.val()) || hasSpecialCharacters(num2IP.val())) {
                     handleInvalidInput("Special characters are not allowed.");
                     return;
                 }
@@ -86,7 +86,7 @@
 
                 // Perform the operation and display the result
                 const result = performOperation(operation, num1, num2);
-                result.text(`Result: ${result}`);
+                resultant.text(`Result: ${result}`);
             });
 
             function isValidNumber(number) {
@@ -105,7 +105,7 @@
             function handleInvalidInput(errorMessage) {
                 errorNum1.text(errorMessage);
                 errorNum2.text(errorMessage);
-                result.text("Result will be displayed here.");
+                resultant.text("Result will be displayed here.");
             }
 
             const performOperation = (operation, num1, num2) => {

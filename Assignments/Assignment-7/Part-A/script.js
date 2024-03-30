@@ -1,118 +1,125 @@
 $(document).ready(function () {
- 
-    const email = $("#email");
-    const uname = $("#username");
-    const password1 = $("#password");
-    const pssword2 = $("#confirmPassword");
+    //initialisatioon form elements
+    const inputEmail = $("#email");
+    const inputUsername = $("#username");
+    const inputPassword = $("#password");
+    const inputConfirmPassword = $("#confirmPassword");
     const errorEmail = $("#errorEmail");
     const errorUsername = $("#errorUsername");
     const errorPassword = $("#errorPassword");
     const errorConfirmPassword = $("#errorConfirmPassword");
-    const submit = $("#loginButton");
+    const submitButton = $("#loginButton");
 
-
-    function checkEmail(email) {
+    //validation for email
+    function validateEmail(email) {
         const emailRegex = /^[A-Za-z0-9._%+-]+@northeastern.edu$/;
         console.log(emailRegex.test(email));
         return emailRegex.test(email);
     }
 
 
-
-    function checkEmlLength(input, minLength, maxLength) {
+    //validation for email input length
+    function validateEmailLength(input, minLength, maxLength) {
         const inputVal = input.val().trim();
         return inputVal.length >= minLength && inputVal.length <= maxLength;
     }
 
 
-
+    //error message for email
     function displayEmailError(input, errorElement, message) {
         errorElement.text(message);
         input.addClass("error");
     }
 
 
-
+    //function to remove error message
     function removeEmailError(input, errorElement) {
         errorElement.text("");
         input.removeClass("error");
     }
 
 
-    email.on("input", function () {
-        if (!checkEmail(email.val())) {
-            displayEmailError(email, errorEmail, "Please enter your Northeastern email ID!");
+    //validate to check if email is valid on change
+    inputEmail.on("input", function () {
+        if (!validateEmail(inputEmail.val())) {
+            displayEmailError(inputEmail, errorEmail, "Please enter a NEU email address");
         } else {
-            removeEmailError(email, errorEmail);
+            removeEmailError(inputEmail, errorEmail);
         }
-        checkForm();
+        validateForm();
     });
 
 
-    uname.on("input", function () {
-        if (!checkEmlLength(uname, 3, 20)) {
-            displayEmailError(uname, errorUsername, "Username should be between 3 and 20 characters!");
+    //validate username on input change
+    inputUsername.on("input", function () {
+        if (!validateEmailLength(inputUsername, 3, 20)) {
+            displayEmailError(inputUsername, errorUsername, "Username should be between 3 and 20 characters");
         } else {
-            removeEmailError(uname, errorUsername);
+            removeEmailError(inputUsername, errorUsername);
         }
-        checkForm();
+        validateForm();
     });
 
 
-  
-    password1.on("input", function () {
-        if (!checkEmlLength(password1, 8, 20)) {
-            displayEmailError(password1, errorPassword, "Password should be between 8 and 20 characters!");
+    //validate password on input change
+    inputPassword.on("input", function () {
+        if (!validateEmailLength(inputPassword, 6, 20)) {
+            displayEmailError(inputPassword, errorPassword, "Password should be between 6 and 20 characters");
         } else {
-            removeEmailError(password1, errorPassword);
+            removeEmailError(inputPassword, errorPassword);
         }
-        checkForm();
+        validateForm();
     });
 
 
-    pssword2.on("input", function () {
-        if (pssword2.val() !== password1.val()) {
-            displayEmailError(pssword2, errorConfirmPassword, "Passwords do not match!");
+    //validate confirm password on input change
+    inputConfirmPassword.on("input", function () {
+        if (inputConfirmPassword.val() !== inputPassword.val()) {
+            displayEmailError(inputConfirmPassword, errorConfirmPassword, "Passwords do not match");
         } else {
-            removeEmailError(pssword2, errorConfirmPassword);
+            removeEmailError(inputConfirmPassword, errorConfirmPassword);
         }
-        checkForm();
+        validateForm();
     });
-   
-    submit.on("click", function (event) {
+    // Bind a click event to the submit button
+    submitButton.on("click", function (event) {
+        console.log("Form in summm");
+
+        // Prevent the default form submission
         event.preventDefault();
 
-       
-        if (checkForm()) {
-            
+        // Validate the form
+        if (validateForm()) {
+            // Redirect after successful validation
             console.log("Form is valid");
             window.location.href = "calculator.html";
         }
     });
 
-    function checkForm() {
+    //validate form on submit and enable disable submit button
+    function validateForm() {
         const isValid =
-            checkEmail(email.val()) &&
-            checkEmlLength(uname, 3, 20) &&
-            checkEmlLength(password1, 6, 20) &&
-            pssword2.val() === password1.val();
+            validateEmail(inputEmail.val()) &&
+            validateEmailLength(inputUsername, 3, 20) &&
+            validateEmailLength(inputPassword, 6, 20) &&
+            inputConfirmPassword.val() === inputPassword.val();
 
-        submit.prop("disabled", !isValid);
+        submitButton.prop("disabled", !isValid);
 
         if (isValid) {
-            submit.prop("disabled", false); 
+            submitButton.prop("disabled", false); // Enable the "Login" button
         } else {
-            submit.prop("disabled", true); 
+            submitButton.prop("disabled", true); // Disable the "Login" button
         }
 
         return isValid;
 
     }
-    submit.on("click", function (event) {
+    submitButton.on("click", function (event) {
         event.preventDefault();
 
-        if (checkForm()) {
-            const username = uname.val();
+        if (validateForm()) {
+            const username = inputUsername.val();
             window.location.href = `calculator.html?username=${username}`;
         }
     });

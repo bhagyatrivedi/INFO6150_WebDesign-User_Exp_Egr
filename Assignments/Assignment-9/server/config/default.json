@@ -1,0 +1,4 @@
+{
+    "secret": "mongodb+srv://bhagya:bhagya@cluster0.fgcyvms.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
+    "jwtSecret": "myjwtsecret"
+}

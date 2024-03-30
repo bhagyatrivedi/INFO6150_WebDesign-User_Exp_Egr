@@ -1,50 +1,50 @@
 $(document).ready(function () {
-
-    let timePassed;
-    let startTime = 0;
-    let flag = false;
-    let datePicker = document.getElementById("dateSelector");
+    // variables declaration
+    let timeelapsed;
+    let startingTime = 0;
+    let running = false;
+    let dateSelector = document.getElementById("dateSelector");
     let timer = document.getElementById("timer");
-    let startButton = document.getElementById("startBtn");
-    let stopButton = document.getElementById("stopBtn");
-    let resetButton = document.getElementById("resetBtn");
-  
-    datePicker.valueAsDate = new Date();
-    datePicker.max = new Date().toISOString().split("T")[0];
-    
-    async function timeUpdate() {
+    let startBtn = document.getElementById("startBtn");
+    let stopBtn = document.getElementById("stopBtn");
+    let resetBtn = document.getElementById("resetBtn");
+    // set date picker to current date
+    dateSelector.valueAsDate = new Date();
+    dateSelector.max = new Date().toISOString().split("T")[0];
+    // async function to update timer and promise
+    async function updateTimer() {
         return new Promise((resolve) => {
             let currentTime = new Date().getTime();
-            let timeLapsed = currentTime - startTime;
-            let time = new Date(timeLapsed);
+            let elapsedTime = currentTime - startingTime;
+            let time = new Date(elapsedTime);
             timer.innerHTML = time.toISOString().substr(11, 8);
             resolve();
         });
     }
-
+    // async function to start timer
     async function startTimer() {
-        if (!flag) {
-            startTime = new Date().getTime();
-            timePassed = setInterval(async () => {
-                await timeUpdate();
+        if (!running) {
+            startingTime = new Date().getTime();
+            timeelapsed = setInterval(async () => {
+                await updateTimer();
             }, 10);
-            flag = true;
+            running = true;
         }
     }
-
+    // function to stop timer
     function stopTimer() {
-        if (flag) {
-            clearInterval(timePassed);
-            flag = false;
+        if (running) {
+            clearInterval(timeelapsed);
+            running = false;
         }
     }
-
+    // function to reset timer
     function resetTimer() {
         stopTimer();
         timer.innerHTML = "00:00:00";
     }
-
-    startButton.addEventListener("click", startTimer);
-    stopButton.addEventListener("click", stopTimer);
-    resetButton.addEventListener("click", resetTimer);
+    // event listeners
+    startBtn.addEventListener("click", startTimer);
+    stopBtn.addEventListener("click", stopTimer);
+    resetBtn.addEventListener("click", resetTimer);
 });

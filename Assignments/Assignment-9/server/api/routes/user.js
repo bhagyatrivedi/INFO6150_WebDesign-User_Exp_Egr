@@ -1,6 +1,8 @@
 const express = require('express')
 const router = express.Router();
 const cors = require('cors');
+
+const CompanyImage = require('../model/CompanyImage');
 const { upload } = require('../middleware/multerConfig'); // Adjust the path as necessary
 
 
@@ -9,6 +11,10 @@ const {check, validationResult} = require('express-validator');
 const User = require('../model/User');
 
 const bcrypt = require('bcryptjs');
+
+const jwt = require('jsonwebtoken')
+
+const config = require('config');
 
 router.use(cors());
 
@@ -72,27 +78,25 @@ router.post('/user/login', async (req, res)=>{
         return res
           .status(400)
           .json({ errors: [{ msg: 'Invalid Credentials' }] });
+
       }else{
-        return res.status(200).json({
-                  "name": user.fullName,
-                   "message":"login success"
-               });
+        console.log("In else")
+        const payload = {
+          user: {
+              id: user.id
+          }
+      }
+      jwt.sign(
+          payload, 
+          config.get('jwtSecret'),
+          {expiresIn: 360000 }, 
+          (err, token)=> {
+              if(err) throw err;   
+              res.json({token});
+          })
+          console.log("else 3")
       }
 
-      // if (req.body.password!=user.password){
-      //     try{
-      //     res.status(400);
-      //     res.json({"message":"Invalid password!"});
-      //     return res.send();
-      //     }catch(error){
-      //         return error;
-      //     }
-      // }else{
-      //     return res.status(200).json({
-      //         "name": user.fullName,
-      //         "message":"login success"
-      //     });
-      // }
   }catch(error){
       res.status(404).json({"message":"This user doesn't exist"});
       return res.send();
@@ -225,6 +229,41 @@ router.put(
         console.error(error);
         res.status(500).send('Server error');
     }
+});
+
+router.get('/company/images', async (req, res) => {
+  try {
+      const images = await CompanyImage.find({});
+      res.json(images);
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Error fetching company images');
+  }
+});
+
+router.post('/company/uploadImage', upload.single('image'), async (req, res) => {
+  if (!req.file) {
+      return res.status(400).send('No file uploaded.');
+  }
+
+  const { name } = req.body;
+  const imageUrl = `${req.protocol}://${req.get('host')}/images/${req.file.filename}`; // Construct the URL to access the uploaded image
+
+  try {
+      const newCompanyImage = new CompanyImage({
+          name,
+          imageUrl
+      });
+
+      await newCompanyImage.save();
+      res.status(201).json({
+          message: 'Image uploaded successfully!',
+          data: newCompanyImage
+      });
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Server error');
+  }
 });
 
 module.exports = router;
