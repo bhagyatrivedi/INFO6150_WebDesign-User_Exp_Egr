@@ -1,70 +1,80 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+## Introduction
 
-## Available Scripts
+This project demonstrates a full-stack web application designed to manage user roles and job postings. It employs Redux for efficient state management in a React-based frontend, paired with a Node.js/Express backend. The application distinguishes between admin and employee users, offering distinct functionalities for each role.
 
-In the project directory, you can run:
+## Prerequisites
 
-### `npm start`
+- **Node.js**: Version 12.x or above is required to ensure compatibility with the syntax and dependencies used.
+- **MongoDB**: Version 4.x or above for the database. Ensure MongoDB is running on the default port.
+- **Web Browser**: A modern web browser is required to interact with the frontend.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+## Installation
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+1. **Repository Cloning**: Clone this repository to obtain the latest version of the code.
+2. **Backend Setup**:
+   - Navigate to the `server` directory.
+   - Execute `npm install` to install all necessary dependencies.
+   - Start the server with `npm start`. The server runs on `http://localhost:5000` by default.
+3. **Frontend Setup**:
+   - Navigate to the `client` directory.
+   - Run `npm install` to install React and other frontend dependencies.
+   - Start the React development server using `npm start`. The client will be available at `http://localhost:3000`.
 
-### `npm test`
+## File Structure
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+The project is divided into `client` and `server` directories, encapsulating the frontend and backend code, respectively.
 
-### `npm run build`
+### Client
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **src/**: Contains all React components, Redux actions, and reducers.
+  - **actions/**: Redux actions for dispatching purposes.
+  - **reducers/**: Redux reducers for state management.
+  - **App/**: Houses React components for each page or functional unit.
+- **public/**: Hosts the `index.html` file and any public assets.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+### Server
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+- **api/**: Contains Express routes, middleware, and models.
+  - **middleware/**: Express middleware for authentication and file handling.
+  - **model/**: Mongoose models for database schemas.
+  - **routes/**: Defines API endpoints.
+- **config/**: Configuration files, including database connection settings.
+- **images/**: Directory for storing uploaded images or static files.
 
-### `npm run eject`
+## Features & Functionalities
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+### Admin Portal
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+- **User Management**: Create and view all users, specifying each user's role as either "employee" or "admin".
+- **Job Postings**: Admin users can create job postings, which are stored in the database and can be viewed by employees.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+### Employee Portal
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- **Job Viewing**: Employees can view a list of available jobs posted by the admin.
 
-## Learn More
+## API Endpoints
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+Detailed documentation for each API endpoint, including request methods, URL parameters, and expected responses.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+### User Management
 
-### Code Splitting
+- **Create User (`POST /user/create`)**: Creates a new user. Requires full name, email, password, and user type ("employee" or "admin").
+- **Get All Users (`GET /users`)**: Retrieves all user details, excluding passwords, for admin use.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
+### Job Management
 
-### Analyzing the Bundle Size
+- **Create Job (`POST /create/job`)**: Allows admins to create new job listings with details such as company name, job title, and salary.
+- **Get Jobs (`GET /get/jobs`)**: Employees can fetch the list of jobs posted by admins.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
+## Running the Project
 
-### Making a Progressive Web App
+Describes how to start both the backend server and the frontend client, including navigating through the application's functionalities.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
+## Contributing
 
-### Advanced Configuration
+Outlines steps for contributing to the project, including forking, feature branching, and pull requests.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
+## License
 
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+Specifies the license under which the project is released, typically MIT License.
